@@ -21,9 +21,19 @@ st.markdown("""<style>
 
 # ───────────────────────── caminhos (relativos: funcionam em qualquer PC) ─────────────────────────
 BASE = Path(__file__).parent
-PASTA = BASE / "dados"
-ARQ_CDV = PASTA / "levantamento_BD_CDVs_via_1_e_2.xlsx"
-ARQ_SIN = PASTA / "levantamento_BD_Sinais_via_1_e_2.xlsx"
+
+
+def achar(palavra):
+    """Procura o .xlsx que contenha a palavra no nome (raiz ou pasta dados/)."""
+    for pasta in (BASE, BASE / "dados"):
+        for p in pasta.glob("*.xlsx"):
+            if palavra.lower() in p.name.lower():
+                return p
+    return BASE / f"{palavra}.xlsx"  # não achou: o app pede upload na barra lateral
+
+
+ARQ_CDV = achar("CDVs")
+ARQ_SIN = achar("Sinais")
 
 COR = {"Preenchido": "#2E9E6B", "Não utilizado": "#B8C0CC", "Pendente": "#E8833A"}
 FUNC_CDV = [("Codificação", "NCTP"), ("Codificação", "SCTP"), ("Codificação", "N12-CTP"),
