@@ -1,0 +1,6 @@
+git init
+git add .
+git commit -m "Dashboard levantamento BD com cruzamentos"
+git branch -M main
+git remote add origin https://github.com/SEU_USUARIO/projeto-integrador-bd.git
+git push -u origin main
